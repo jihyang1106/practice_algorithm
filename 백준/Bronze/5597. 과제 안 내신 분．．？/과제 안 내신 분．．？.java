@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.stream.IntStream;
 
 public class Main {
 
@@ -8,13 +9,15 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         boolean[] attendance = new boolean[31];
 
-        for(int i=0; i<28; i++) {
-            attendance[Integer.parseInt(br.readLine())] = true;
-        }
-        int i=0;
-        for (Boolean num: attendance) {
-            if(num == false) if(i != 0) System.out.println(i);
-            i++;
-        }
+        IntStream.range(0, 28).forEach(i -> {
+            try {
+                attendance[Integer.parseInt(br.readLine())] = true;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        IntStream.range(1, 31).filter(i -> !attendance[i])
+                .forEach(System.out::println);
     }
 }
