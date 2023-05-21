@@ -1,8 +1,7 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.Arrays;
 
 public class Main {
 
@@ -12,15 +11,10 @@ public class Main {
     }
 
     public static int solution(String input) {
-        StringTokenizer st = new StringTokenizer(input);
+        return  Arrays.stream(input.split(" "))
+                .mapToInt(Integer::parseInt)
+                .map(x -> x * x)
+                .sum()%10;
 
-        int sum = 0; // 합
-        int pow = 0; // 제곱 변수
-        while(st.hasMoreTokens()) {
-            pow = Integer.parseInt(st.nextToken());
-            sum += pow*pow;
-        }
-
-        return sum%10;
     }
 }
